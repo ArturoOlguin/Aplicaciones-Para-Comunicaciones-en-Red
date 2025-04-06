@@ -17,6 +17,7 @@ public class Servidor {
                 pw.flush();
                 pw.close();
                 cl.close();
+                s.close();
 
             }
         } catch (Exception e) {

@@ -12,7 +12,7 @@ public class Servidor {
                 System.out.println("Conexión establecida desde: " + cl.getInetAddress() + ":" + cl.getPort());
                 
                 // Enviar mensaje al cliente
-                String mensaje = "Hola mundo";
+                String mensaje = "Eco: José Arturo Olguín Martínez Grupo: 6CM3 Materia:Aplicaciones para comunicaciones en red";
                 PrintWriter pw = new PrintWriter(new OutputStreamWriter(cl.getOutputStream()));
                 pw.println(mensaje);
                 pw.flush();
@@ -26,7 +26,7 @@ public class Servidor {
                 pw.close();
                 br.close();
                 cl.close();
-                s.close();
+                
             }
         } catch (Exception e) {
             e.printStackTrace();

@@ -1,3 +1,7 @@
+/*Elaborado por: Olguín Martínez José Arturo
+ * Grupo 6CM3
+ * Aplicaciones para comunicaciones en red
+ */
 import java.net.*;
 import java.io.*;
 
@@ -12,7 +16,7 @@ public class Servidor {
                 System.out.println("Conexión establecida desde: " + cl.getInetAddress() + ":" + cl.getPort());
                 
                 // Enviar mensaje al cliente
-                String mensaje = "Hola mundo";
+                String mensaje = "Eco: José Arturo Olguín Martínez Grupo: 6CM3 Materia:Aplicaciones para comunicaciones en red";
                 PrintWriter pw = new PrintWriter(new OutputStreamWriter(cl.getOutputStream()));
                 pw.println(mensaje);
                 pw.flush();
@@ -26,6 +30,10 @@ public class Servidor {
                 pw.close();
                 br.close();
                 cl.close();
+<<<<<<< HEAD
+=======
+                
+>>>>>>> 89e70be43e03dd342a19f20e49dc05456d361d04
             }
         } catch (Exception e) {
             e.printStackTrace();

@@ -1,3 +1,8 @@
+/*Elaborado por: Olguín Martínez José Arturo
+ * Grupo 6CM3
+ * Aplicaciones para comunicaciones en red
+ */
+
 import java.net.*;
 import java.io.*;
 

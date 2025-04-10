@@ -26,7 +26,6 @@ public class Servidor {
                 pw.close();
                 br.close();
                 cl.close();
-                s.close();
             }
         } catch (Exception e) {
             e.printStackTrace();

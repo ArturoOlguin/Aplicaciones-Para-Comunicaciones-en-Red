@@ -16,21 +16,20 @@ public class ClienteArchivos {
             Socket cl = new Socket(host, pto);
             DataOutputStream dos = new DataOutputStream(cl.getOutputStream());
             
-            // Preguntar cuántos archivos se enviarán
-            System.out.print("\n¿Cuántos archivos desea enviar? ");
-            int numArchivos = Integer.parseInt(br.readLine());
-            dos.writeInt(numArchivos);
-            dos.flush();
-            
-            for (int i = 0; i < numArchivos; i++) {
-                System.out.println("\nSeleccione el archivo #" + (i+1));
-                
-                // Elección del archivo
-                JFileChooser jf = new JFileChooser();
-                int r = jf.showOpenDialog(null);
+            // Configurar JFileChooser para selección múltiple
+            JFileChooser jf = new JFileChooser();
+            jf.setMultiSelectionEnabled(true); // Habilitar selección múltiple
+            int r = jf.showOpenDialog(null);
 
-                if (r == JFileChooser.APPROVE_OPTION) {
-                    File f = jf.getSelectedFile();
+            if (r == JFileChooser.APPROVE_OPTION) {
+                File[] files = jf.getSelectedFiles(); // Obtener array de archivos seleccionados
+                
+                // Enviar cantidad de archivos primero
+                dos.writeInt(files.length);
+                dos.flush();
+                
+                for (int i = 0; i < files.length; i++) {
+                    File f = files[i];
                     String archivo = f.getAbsolutePath();
                     String nombre = f.getName();
                     long tam = f.length();
@@ -53,15 +52,17 @@ public class ClienteArchivos {
                         dos.flush();
                         enviados += n;
                         porcentaje = (int)(enviados * 100 / tam);
-                        System.out.print("Enviando archivo " + (i+1) + ": " + porcentaje + "%\r");
+                        System.out.print("Enviando archivo " + (i+1) + "/" + files.length + 
+                                       " (" + nombre + "): " + porcentaje + "%\r");
                     }
 
                     dis.close();
                     System.out.println("\nArchivo " + nombre + " enviado correctamente.");
                 }
+                
+                System.out.println("\nTodos los archivos (" + files.length + ") han sido enviados.");
             }
             
-            System.out.println("\nTodos los archivos han sido enviados.");
             dos.close();
             cl.close();
         } catch (Exception e) {
